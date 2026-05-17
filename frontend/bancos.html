@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mis bancos - Fintech Recommender</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231976d2'/%3E%3Ctext x='50' y='68' font-family='Arial,sans-serif' font-size='60' font-weight='700' text-anchor='middle' fill='white'%3E%E2%82%AC%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script src="auth.js"></script>
+<script>requerirAutenticacion();</script>
+<div class="layout">
+<aside class="sidebar">
+    <div class="sidebar-top">
+        <div class="logo">Fintech Recommender</div>
+        <ul class="nav-links">
+            <li><a href="transacciones.html" id="nav-transacciones">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 6h18M3 12h18M3 18h12"/>
+                </svg>
+                <span>Transacciones</span>
+            </a></li>
+            <li><a href="bancos.html" id="nav-bancos">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"/>
+                </svg>
+                <span>Mis bancos</span>
+            </a></li>
+            <li><a href="objetivos.html" id="nav-objetivos">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9"/>
+                    <circle cx="12" cy="12" r="5"/>
+                    <circle cx="12" cy="12" r="1.5"/>
+                </svg>
+                <span>Objetivos</span>
+            </a></li>
+            <li><a href="recomendaciones.html" id="nav-recomendaciones">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.7.6 1 1.4 1 2.3h6c0-.9.3-1.7 1-2.3A7 7 0 0 0 12 2z"/>
+                </svg>
+                <span>Recomendaciones</span>
+            </a></li>
+        </ul>
+    </div>
+    <div class="sidebar-bottom">
+        <div class="user-info">
+            <span class="user-avatar" id="usuario-avatar"></span>
+            <span id="usuario-actual"></span>
+        </div>
+        <button id="btn-logout">Cerrar sesión</button>
+    </div>
+</aside>
+<main>
+    <div id="notificacion" class="oculto"></div>
+
+    <section id="bancos-section">
+        <h2>Mis bancos</h2>
+        <p class="ayuda">Gestiona las cuentas que tienes sincronizadas y conecta nuevos bancos.</p>
+
+        <div class="bancos-conectados-wrap">
+            <h3 class="subseccion">Bancos conectados</h3>
+            <div id="lista-bancos-conectados" class="lista-bancos-conectados"></div>
+            <p id="sin-bancos-msg" class="sin-bancos-msg">
+                Aún no has conectado ninguna cuenta. Selecciona tu banco abajo para empezar.
+            </p>
+        </div>
+
+        <div class="bancos-disponibles-wrap">
+            <h3 class="subseccion">Conectar un banco</h3>
+            <p class="ayuda">Haz click en el banco con el que tengas cuenta para sincronizar tus movimientos.</p>
+            <div id="grid-bancos" class="grid-bancos"></div>
+        </div>
+    </section>
+</main>
+</div>
+
+<!-- Wizard de conexion -->
+<div id="modal-wizard" class="modal-overlay oculto">
+    <div class="modal modal-wizard">
+        <div class="wizard-header">
+            <div class="wizard-banco-info">
+                <div class="banco-mini-logo" id="wizard-banco-logo"></div>
+                <div>
+                    <h3 class="modal-titulo" id="wizard-banco-nombre">Banco</h3>
+                    <span class="sandbox-badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/>
+                        </svg>
+                        Sandbox · Modo de prueba
+                    </span>
+                </div>
+            </div>
+            <button type="button" id="btn-cerrar-wizard" class="wizard-cerrar" aria-label="Cerrar">×</button>
+        </div>
+
+        <div class="wizard-stepper">
+            <div class="step" data-step="1"><span class="step-num">1</span><span class="step-label">Consentimiento</span></div>
+            <div class="step-line"></div>
+            <div class="step" data-step="2"><span class="step-num">2</span><span class="step-label">Acceder</span></div>
+            <div class="step-line"></div>
+            <div class="step" data-step="3"><span class="step-num">3</span><span class="step-label">Verificar</span></div>
+            <div class="step-line"></div>
+            <div class="step" data-step="4"><span class="step-num">4</span><span class="step-label">Cuentas</span></div>
+        </div>
+
+        <div class="wizard-paso" id="wizard-paso-1">
+            <h4 class="wizard-titulo">Vas a conectar tu banco con Fintech Recommender</h4>
+            <p class="wizard-texto">Para sincronizar tus movimientos necesitamos tu consentimiento. La conexion se realiza de forma segura mediante el estandar PSD2 / Open Banking. Solo tendremos acceso de lectura a:</p>
+            <ul class="wizard-lista">
+                <li>Datos identificativos de tus cuentas</li>
+                <li>Saldo actual</li>
+                <li>Historial de movimientos de los ultimos 90 dias</li>
+            </ul>
+            <p class="wizard-aviso">Este es un entorno <strong>sandbox</strong>. No se conecta a tu banco real ni se almacenan credenciales reales.</p>
+        </div>
+
+        <div class="wizard-paso oculto" id="wizard-paso-2">
+            <h4 class="wizard-titulo">Accede a tu banca online</h4>
+            <p class="wizard-texto">Introduce tus credenciales para continuar.</p>
+            <form class="wizard-form" autocomplete="off">
+                <label>Usuario / DNI
+                    <input type="text" id="wizard-usuario" autocomplete="off" placeholder="Cualquier valor sirve en sandbox">
+                </label>
+                <label>Contrasena
+                    <input type="password" id="wizard-password" autocomplete="off" placeholder="••••••">
+                </label>
+            </form>
+            <p class="wizard-hint">Demo: cualquier usuario y contrasena de al menos 4 caracteres son validos.</p>
+        </div>
+
+        <div class="wizard-paso oculto" id="wizard-paso-3">
+            <h4 class="wizard-titulo">Verificacion en dos pasos</h4>
+            <p class="wizard-texto">Hemos enviado un codigo de 6 digitos al telefono asociado a tu cuenta.</p>
+            <div class="wizard-codigo">
+                <input type="text" id="wizard-codigo" maxlength="6" inputmode="numeric" placeholder="------">
+            </div>
+            <p class="wizard-hint">Demo: usa el codigo <strong>123456</strong>.</p>
+        </div>
+
+        <div class="wizard-paso oculto" id="wizard-paso-4">
+            <h4 class="wizard-titulo">Selecciona el tipo de cuenta a sincronizar</h4>
+            <p class="wizard-texto">Cada conexion sincroniza un solo tipo de cuenta. Puedes conectar otra mas tarde.</p>
+            <div class="wizard-cuentas" id="wizard-cuentas"></div>
+        </div>
+
+        <div class="wizard-paso oculto" id="wizard-paso-sync">
+            <div class="wizard-spinner"></div>
+            <h4 class="wizard-titulo">Sincronizando movimientos...</h4>
+            <p class="wizard-texto" id="wizard-sync-texto">Generando tu historial financiero.</p>
+        </div>
+
+        <div class="modal-actions wizard-actions">
+            <button type="button" id="wizard-atras" class="btn-secundario">Atras</button>
+            <button type="button" id="wizard-siguiente" class="btn-primario">Continuar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal desconectar -->
+<div id="modal-desconectar" class="modal-overlay oculto">
+    <div class="modal">
+        <h3 class="modal-titulo">Desconectar banco</h3>
+        <p class="modal-texto" id="modal-desconectar-texto">¿Seguro que deseas desconectar esta cuenta?</p>
+        <div class="modal-actions">
+            <button type="button" id="btn-cancelar-desconectar" class="btn-secundario">Cancelar</button>
+            <button type="button" id="btn-confirmar-desconectar" class="btn-peligro">Desconectar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal cerrar sesion -->
+<div id="modal-logout" class="modal-overlay oculto">
+    <div class="modal">
+        <h3 class="modal-titulo">Cerrar sesión</h3>
+        <p class="modal-texto">¿Seguro que deseas cerrar tu sesión?</p>
+        <div class="modal-actions">
+            <button type="button" id="btn-cancelar-logout" class="btn-secundario">Cancelar</button>
+            <button type="button" id="btn-confirmar-logout" class="btn-peligro">Cerrar sesión</button>
+        </div>
+    </div>
+</div>
+
+<script src="shared.js?v=4"></script>
+<script src="bancos.js?v=4"></script>
+</body>
+</html>

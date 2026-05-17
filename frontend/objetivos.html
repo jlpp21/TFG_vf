@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Objetivos - Fintech Recommender</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231976d2'/%3E%3Ctext x='50' y='68' font-family='Arial,sans-serif' font-size='60' font-weight='700' text-anchor='middle' fill='white'%3E%E2%82%AC%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css?v=6">
+</head>
+<body>
+<script src="auth.js"></script>
+<script>requerirAutenticacion();</script>
+<div class="layout">
+<aside class="sidebar">
+    <div class="sidebar-top">
+        <div class="logo">Fintech Recommender</div>
+        <ul class="nav-links">
+            <li><a href="transacciones.html" id="nav-transacciones">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 6h18M3 12h18M3 18h12"/>
+                </svg>
+                <span>Transacciones</span>
+            </a></li>
+            <li><a href="bancos.html" id="nav-bancos">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"/>
+                </svg>
+                <span>Mis bancos</span>
+            </a></li>
+            <li><a href="objetivos.html" id="nav-objetivos">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9"/>
+                    <circle cx="12" cy="12" r="5"/>
+                    <circle cx="12" cy="12" r="1.5"/>
+                </svg>
+                <span>Objetivos</span>
+            </a></li>
+            <li><a href="recomendaciones.html" id="nav-recomendaciones">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.7.6 1 1.4 1 2.3h6c0-.9.3-1.7 1-2.3A7 7 0 0 0 12 2z"/>
+                </svg>
+                <span>Recomendaciones</span>
+            </a></li>
+        </ul>
+    </div>
+    <div class="sidebar-bottom">
+        <div class="user-info">
+            <span class="user-avatar" id="usuario-avatar"></span>
+            <span id="usuario-actual"></span>
+        </div>
+        <button id="btn-logout">Cerrar sesión</button>
+    </div>
+</aside>
+<main>
+    <div id="notificacion" class="oculto"></div>
+
+    <section id="objetivos-section">
+        <h2>Mis objetivos financieros</h2>
+        <p class="ayuda">
+            Marca para cada meta el plazo en el que quieres conseguirla. Estos datos se guardan en tu perfil
+            y se usarán para personalizar las recomendaciones de la IA.
+        </p>
+
+        <form id="form-objetivos" class="objetivos-form">
+            <div class="objetivos-cabecera">
+                <span class="objetivos-col-meta">Meta</span>
+                <span class="objetivos-col-plazo">No me interesa</span>
+                <span class="objetivos-col-plazo">Corto plazo<br><small>&lt; 2 años</small></span>
+                <span class="objetivos-col-plazo">Medio plazo<br><small>2 - 5 años</small></span>
+                <span class="objetivos-col-plazo">Largo plazo<br><small>&gt; 5 años</small></span>
+            </div>
+            <div id="objetivos-filas"></div>
+            <div class="objetivos-acciones">
+                <button type="submit">Guardar objetivos</button>
+            </div>
+        </form>
+    </section>
+</main>
+</div>
+
+<!-- Modal cerrar sesion -->
+<div id="modal-logout" class="modal-overlay oculto">
+    <div class="modal">
+        <h3 class="modal-titulo">Cerrar sesión</h3>
+        <p class="modal-texto">¿Seguro que deseas cerrar tu sesión?</p>
+        <div class="modal-actions">
+            <button type="button" id="btn-cancelar-logout" class="btn-secundario">Cancelar</button>
+            <button type="button" id="btn-confirmar-logout" class="btn-peligro">Cerrar sesión</button>
+        </div>
+    </div>
+</div>
+
+<script src="shared.js?v=6"></script>
+<script src="objetivos.js?v=6"></script>
+</body>
+</html>

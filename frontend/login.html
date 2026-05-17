@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar sesión - Fintech Recommender</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231976d2'/%3E%3Ctext x='50' y='68' font-family='Arial,sans-serif' font-size='60' font-weight='700' text-anchor='middle' fill='white'%3E%E2%82%AC%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-body">
+<div class="auth-container">
+    <h1 class="auth-logo">Fintech Recommender</h1>
+    <h2 class="auth-titulo">Iniciar sesión</h2>
+    <p>Accede a tu panel de transacciones y recomendaciones</p>
+
+    <div id="auth-mensaje" class="oculto"></div>
+
+    <form id="form-login" class="auth-form">
+        <label>
+            Correo electrónico:
+            <input type="email" id="login-correo" autocomplete="username" required>
+        </label>
+        <label>
+            Contraseña:
+            <input type="password" id="login-password" autocomplete="current-password" required>
+        </label>
+        <button type="submit">Entrar</button>
+    </form>
+
+    <p class="auth-link">
+        ¿No tienes cuenta? <a href="register.html">Regístrate</a>
+    </p>
+</div>
+<script src="auth.js"></script>
+<script src="login.js"></script>
+</body>
+</html>

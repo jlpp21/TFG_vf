@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Recomendaciones - Fintech Recommender</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231976d2'/%3E%3Ctext x='50' y='68' font-family='Arial,sans-serif' font-size='60' font-weight='700' text-anchor='middle' fill='white'%3E%E2%82%AC%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css?v=7">
+</head>
+<body>
+<script src="auth.js"></script>
+<script>requerirAutenticacion();</script>
+<div class="layout">
+<aside class="sidebar">
+    <div class="sidebar-top">
+        <div class="logo">Fintech Recommender</div>
+        <ul class="nav-links">
+            <li><a href="transacciones.html" id="nav-transacciones">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 6h18M3 12h18M3 18h12"/>
+                </svg>
+                <span>Transacciones</span>
+            </a></li>
+            <li><a href="bancos.html" id="nav-bancos">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"/>
+                </svg>
+                <span>Mis bancos</span>
+            </a></li>
+            <li><a href="objetivos.html" id="nav-objetivos">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9"/>
+                    <circle cx="12" cy="12" r="5"/>
+                    <circle cx="12" cy="12" r="1.5"/>
+                </svg>
+                <span>Objetivos</span>
+            </a></li>
+            <li><a href="recomendaciones.html" id="nav-recomendaciones">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.7.6 1 1.4 1 2.3h6c0-.9.3-1.7 1-2.3A7 7 0 0 0 12 2z"/>
+                </svg>
+                <span>Recomendaciones</span>
+            </a></li>
+        </ul>
+    </div>
+    <div class="sidebar-bottom">
+        <div class="user-info">
+            <span class="user-avatar" id="usuario-avatar"></span>
+            <span id="usuario-actual"></span>
+        </div>
+        <button id="btn-logout">Cerrar sesión</button>
+    </div>
+</aside>
+<main>
+    <div id="notificacion" class="oculto"></div>
+
+    <section id="recomendaciones-section">
+        <div class="ia-banner">
+            <div class="ia-banner-icono">🤖</div>
+            <div class="ia-banner-texto">
+                <strong>Recomendaciones generadas por IA</strong>
+                <p>Un modelo de lenguaje ejecutándose en local (Ollama / llama3.2) analiza tu perfil,
+                   tus movimientos de los últimos 12 meses y los objetivos que has guardado.
+                   Los datos no salen de tu máquina. La IA puede equivocarse: úsalas como punto de partida.</p>
+            </div>
+        </div>
+
+        <div class="recs-toolbar">
+            <button id="btn-cargar-recomendaciones" class="btn-primario">Generar recomendaciones</button>
+            <span class="recs-hint" id="recs-hint"></span>
+        </div>
+
+        <div id="recs-loading" class="recs-loading oculto">
+            <div class="spinner"></div>
+            <p>La IA está analizando tu situación. Esto puede tardar 20-60 segundos…</p>
+        </div>
+
+        <div id="recs-resultado" class="recs-resultado oculto">
+            <div class="diagnostico-card">
+                <span class="diagnostico-label">Diagnóstico</span>
+                <p class="diagnostico-texto" id="diagnostico-texto">--</p>
+            </div>
+
+            <div id="alertas-wrap" class="alertas-wrap oculto">
+                <h3>Alertas</h3>
+                <ul id="lista-alertas"></ul>
+            </div>
+
+            <h3 class="recs-titulo">Recomendaciones</h3>
+            <div id="lista-recomendaciones" class="recs-grid"></div>
+        </div>
+    </section>
+</main>
+</div>
+
+<!-- Modal cerrar sesion -->
+<div id="modal-logout" class="modal-overlay oculto">
+    <div class="modal">
+        <h3 class="modal-titulo">Cerrar sesión</h3>
+        <p class="modal-texto">¿Seguro que deseas cerrar tu sesión?</p>
+        <div class="modal-actions">
+            <button type="button" id="btn-cancelar-logout" class="btn-secundario">Cancelar</button>
+            <button type="button" id="btn-confirmar-logout" class="btn-peligro">Cerrar sesión</button>
+        </div>
+    </div>
+</div>
+
+<script src="shared.js?v=7"></script>
+<script src="recomendaciones.js?v=7"></script>
+</body>
+</html>

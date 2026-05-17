@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Fintech Recommender</title>
+    <meta http-equiv="refresh" content="0; url=transacciones.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231976d2'/%3E%3Ctext x='50' y='68' font-family='Arial,sans-serif' font-size='60' font-weight='700' text-anchor='middle' fill='white'%3E%E2%82%AC%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<script src="auth.js"></script>
+<script>
+    if (obtenerSesion()) {
+        window.location.replace('transacciones.html');
+    } else {
+        window.location.replace('login.html');
+    }
+</script>
+</body>
+</html>
