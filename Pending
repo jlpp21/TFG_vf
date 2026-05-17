@@ -1,0 +1,23 @@
+En las bases de datos(cuándo se cree un usuario), debe ser al azar las BBDD y tal, pero hay que asegurar que tengamos todos los escenarios posibles, es decir: 
+  - El tipico cliente con mas deudas que vida.
+  - El tipico cliente que debe, pero va al día.
+  - El tipico cliente que tiene dinero de sobra.
+
+Además, las recomendaciones financieras de basan en el historia economico del cliente, depende de eso lo que puede hacer. Y tambien tendrán que rellenar un formulario en donde nosotros como empresa les ofreceremos distintas opciones y ellos podran elegir, por ejemplo:
+  - Comprar un piso.
+  - Invetir en cripto.
+  - Invertir en empresas.
+  - Ahora mucho dinero.
+  - Dedicarse a la inversión.
+  - Invertir en locales y alquilarlos.
+  Les podemos ofrecer un top 10 de lo mas importante en la actualidad. Las recomendaciones financieras las recibiran por email y además lo verán en la app.
+
+Por último, como empresa, les daremos una visual, es decir, distintos dashboards, por ejemplo:
+- Uno con sus gastos.
+- Uno con sus ingresos.
+- Uno que ina ingresos y gastos.
+- Uno que haga una comparativa entre su balance y cómo debería de ser respecto al metodo 50/30/20.
+- Uno que le diga cómo le ira economicamente si sigue cómo va.
+- Uno que le diga cómo le ira economicamente si le hace caso a las recomendaciones financieras.
+Con los ultimos 2 dashboards, podran ver un simulacro de su futuro economico en sus +3 años, es decir, si estamos en el 2026, que lo vean hasta el 2029, de esta forma, podrán ver si pasaran una crisis economica, la idea es que los clientes mejoren su economia y eviten un posible estado de pobreza.
+
